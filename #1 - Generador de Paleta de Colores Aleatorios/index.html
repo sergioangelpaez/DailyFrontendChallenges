@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Generador Aleatorio de Colores</title>
+    <script>
+        function initApp() {
+            updateColorContainers();
+            const generateButton = document.getElementById('generateColorButton');
+            generateButton.addEventListener('click', updateColorContainers);
+        }
+        document.addEventListener('DOMContentLoaded', initApp);
+        
+        function generateRandomColor() {
+            const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0');
+            return randomColor;
+        }
+
+        function hexToRgb(hex) {
+            let r = 0, g = 0, b = 0;
+
+            // Eliminar el símbolo '#' si está presente
+            if (hex.startsWith('#')) {
+                hex = hex.slice(1);
+            }
+
+            // Parsear los valores RGB
+            if (hex.length === 3) { // Ej: #F0C
+                r = parseInt(hex[0] + hex[0], 16);
+                g = parseInt(hex[1] + hex[1], 16);
+                b = parseInt(hex[2] + hex[2], 16);
+            } else if (hex.length === 6) { // Ej: #FF00CC
+                r = parseInt(hex.substring(0, 2), 16);
+                g = parseInt(hex.substring(2, 4), 16);
+                b = parseInt(hex.substring(4, 6), 16);
+            }
+
+            return { r, g, b };
+        }
+
+        function getLuminance(r, g, b) {
+            // La fórmula de la luminancia percibida por el ojo humano
+            return (0.299 * r + 0.587 * g + 0.114 * b);
+        }
+
+        function updateColorContainers() {
+            const colorContainers = document.querySelectorAll('[id^="colorContainer"]');
+            colorContainers.forEach(function(container) {
+                const hexColor = generateRandomColor();
+
+                const { r, g, b } = hexToRgb(hexColor);
+
+                const luminance = getLuminance(r, g, b);
+
+                const textColor = luminance > 186 ? 'black' : 'white';
+
+                // Asignar el color de fondo y el texto
+                container.style.backgroundColor = hexColor;
+                container.style.color = textColor;
+                container.textContent = hexColor.toUpperCase();
+            });
+        }
+
+    </script>
+</head>
+<body>
+    <div class="w-full h-screen bg-gray-100 p-4">
+        <!-- Header -->
+        <div class="fixed lg:top-15 lg:left-0 lg:right-0 lg:mx-auto lg:w-[80%] lg:bottom-0 lg:px-5 lg:rounded-xl bottom-5 right-5 bg-white h-fit rounded-full shadow-xl flex justify-between items-center p-2 z-10">
+            <div>
+                <h1 class="text-xl font-bold hidden lg:block">Generador de Colores Aleatorios</h1>
+            </div>
+            <div class="flex lg:rounded-xl rounded-full lg:h-12 lg:w-25 w-20 h-20">
+                <button class="lg:rounded-xl w-full rounded-full bg-purple-600 cursor-pointer text-white hover:scale-105 transition duration-300" id="generateColorButton">Generar</button>
+            </div>
+        </div>
+
+        <!-- Colors -->
+         <div class="w-full h-full bg-white p-4 rounded-lg shadow-lg">
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-4 h-full">
+                <div class="h-full rounded-lg flex justify-center items-center flex-col font-bold" id="colorContainer1"></div>
+                <div class="h-full rounded-lg flex justify-center items-center flex-col font-bold" id="colorContainer2"></div>
+                <div class="h-full rounded-lg flex justify-center items-center flex-col font-bold" id="colorContainer3"></div>
+                <div class="h-full rounded-lg flex justify-center items-center flex-col font-bold" id="colorContainer4"></div>
+                <div class="h-full rounded-lg flex justify-center items-center flex-col font-bold" id="colorContainer5"></div>
+            </div>
+         </div>
+    </div>
+</body>
+</html>
