@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tareas</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script>
+        function addTask(){
+            const taskInput = document.getElementById('taskInput');
+            const taskList = document.getElementById('taskList');
+            const errorMessageSpan = document.getElementById('errorMessage');
+
+            if(taskInput.value.trim()){
+                const li = document.createElement('li');
+                li.textContent = taskInput.value.trim();
+                taskList.appendChild(li);
+                taskInput.value = '';
+                errorMessageSpan.textContent = '';
+            } else {
+                errorMessageSpan.textContent = 'Ingrese el nombre de la tarea';
+            }
+        }
+
+        function initializeApp(){
+            const addButton = document.getElementById('addButton');
+            const taskInput = document.getElementById('taskInput');
+
+            addButton.addEventListener('click', addTask);
+
+            taskInput.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter') {
+                    addTask();
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', initializeApp);
+    </script>
+</head>
+<body>
+    <div class="flex bg-gray-100 w-full h-screen justify-center items-center">
+        <div class="bg-white p-5 rounded-xl h-100 gap-3 flex flex-col">
+            <h1 class="text-xl font-bold">Lista de Tareas</h1>
+            <div class="gap-5 h-10 flex justify-center items-center">
+                <input type="text" id="taskInput" placeholder="Añadir nueva tarea" class="border-1 border-gray-200 h-full p-2 hover:ring hover:ring-blue-500 focus:outline-blue-500 rounded-sm">
+                <button id="addButton" class="bg-blue-500 rounded-sm py-2 px-5 text-white hover:scale-102 hover:bg-blue-600 cursor-pointer">Agregar</button>
+            </div>
+            <span id="errorMessage" class="text-red-500 text-sm"></span>
+            <h3 class="text-md font-semibold">Lista de Tareas</h3>
+            <div class="rounded-sm border-1 h-full border-gray-200 px-3 py-1" id="taskListContainer">
+                <ul id="taskList" class="list-disc list-inside"></ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
