@@ -9,33 +9,36 @@
     <script>
         let currentTheme = sessionStorage.getItem('currentTheme') || 'light';
 
-        function loadTheme(bg, appContainer, tittle, taskInput, addButton, errorMessage, taskList, toggleDarkModeButton){
-            if(currentTheme === 'light'){
-                bg.classList.add('background-container-bg-light');
+        function loadTheme(elements) {
+            const { backgroundContainer, appContainer, tittle, taskInput, addButton, errorMessage, taskListContainer, toggleDarkModeButton } = elements;
+
+            if (currentTheme === 'light') {
+                backgroundContainer.classList.add('background-container-bg-light');
                 appContainer.classList.add('app-container-bg-light');
                 tittle.classList.add('tittle-text-color-light');
                 taskInput.classList.add('add-task-input-border-light');
                 addButton.classList.add('add-task-button-style-light');
                 errorMessage.classList.add('error-message-span-light');
-                taskList.classList.add('task-list-container-light');
+                taskListContainer.classList.add('task-list-container-light');
                 toggleDarkModeButton.classList.add('toggle-dark-mode-button-light');
-            }else{
-                bg.classList.add('background-container-bg-dark');
+            } else {
+                backgroundContainer.classList.add('background-container-bg-dark');
                 appContainer.classList.add('app-container-bg-dark');
                 tittle.classList.add('tittle-text-color-dark');
                 taskInput.classList.add('add-task-input-border-dark');
                 addButton.classList.add('add-task-button-style-dark');
                 errorMessage.classList.add('error-message-span-dark');
-                taskList.classList.add('task-list-container-dark');
+                taskListContainer.classList.add('task-list-container-dark');
                 toggleDarkModeButton.classList.add('toggle-dark-mode-button-dark');
             }
         }
 
-        function toggleDarkMode(bg, appContainer, tittle, taskInput, addButton, errorMessage, taskList){
+        function toggleDarkMode(elements) {
+            const { backgroundContainer, appContainer, tittle, taskInput, addButton, errorMessage, taskListContainer, toggleDarkModeButton } = elements;
             let newTheme = currentTheme === 'light' ? 'dark' : 'light';
 
-            bg.classList.remove(`background-container-bg-${currentTheme}`);
-            bg.classList.add(`background-container-bg-${newTheme}`);
+            backgroundContainer.classList.remove(`background-container-bg-${currentTheme}`);
+            backgroundContainer.classList.add(`background-container-bg-${newTheme}`);
 
             appContainer.classList.remove(`app-container-bg-${currentTheme}`);
             appContainer.classList.add(`app-container-bg-${newTheme}`);
@@ -52,47 +55,51 @@
             errorMessage.classList.remove(`error-message-span-${currentTheme}`);
             errorMessage.classList.add(`error-message-span-${newTheme}`);
 
-            taskList.classList.remove(`task-list-container-${currentTheme}`);
-            taskList.classList.add(`task-list-container-${newTheme}`);
+            taskListContainer.classList.remove(`task-list-container-${currentTheme}`);
+            taskListContainer.classList.add(`task-list-container-${newTheme}`);
+
+            toggleDarkModeButton.classList.remove(`toggle-dark-mode-button-${currentTheme}`);
+            toggleDarkModeButton.classList.add(`toggle-dark-mode-button-${newTheme}`);
 
             currentTheme = newTheme;
             sessionStorage.setItem('currentTheme', newTheme);
         }
 
-        function addTask(){
-            const taskInput = document.getElementById('taskInput');
-            const taskList = document.getElementById('taskList');
-            const errorMessageSpan = document.getElementById('errorMessage');
+        function addTask(elements) {
+            const { taskInput, taskList, errorMessage } = elements;
 
-            if(taskInput.value.trim()){
+            if (taskInput.value.trim()) {
                 const li = document.createElement('li');
                 li.textContent = taskInput.value.trim();
                 taskList.appendChild(li);
                 taskInput.value = '';
-                errorMessageSpan.textContent = '';
+                errorMessage.textContent = '';
             } else {
-                errorMessageSpan.textContent = 'Ingrese el nombre de la tarea';
+                errorMessage.textContent = 'Ingrese el nombre de la tarea';
             }
         }
 
-        function initializeApp(){
-            const addButton = document.getElementById('addButton');
-            const taskInput = document.getElementById('taskInput');
-            const toggleDarkModeButton = document.getElementById('toggleDarkModeButton');
-            const bg = document.getElementById('backgroundContainer');
-            const appContainer = document.getElementById('appContainer');
-            const tittle = document.getElementById('tittle');
-            const errorMessage = document.getElementById('errorMessage');
-            const taskList = document.getElementById('taskListContainer');
+        function initializeApp() {
+            const UIElements = {
+                addButton: document.getElementById('addButton'),
+                taskInput: document.getElementById('taskInput'),
+                toggleDarkModeButton: document.getElementById('toggleDarkModeButton'),
+                backgroundContainer: document.getElementById('backgroundContainer'),
+                appContainer: document.getElementById('appContainer'),
+                tittle: document.getElementById('tittle'),
+                errorMessage: document.getElementById('errorMessage'),
+                taskListContainer: document.getElementById('taskListContainer'),
+                taskList: document.getElementById('taskList')
+            };
 
-            loadTheme(bg, appContainer, tittle, taskInput, addButton, errorMessage, taskList, toggleDarkModeButton);
+            loadTheme(UIElements);
 
-            addButton.addEventListener('click', addTask);
-            toggleDarkModeButton.addEventListener('click', () => {toggleDarkMode(bg, appContainer, tittle, taskInput, addButton, errorMessage, taskList)});
+            UIElements.addButton.addEventListener('click', () => addTask(UIElements));
+            UIElements.toggleDarkModeButton.addEventListener('click', () => toggleDarkMode(UIElements));
 
-            taskInput.addEventListener('keydown', (event) => {
+            UIElements.taskInput.addEventListener('keydown', (event) => {
                 if (event.key === 'Enter') {
-                    addTask();
+                    addTask(UIElements);
                 }
             });
         }
@@ -134,8 +141,8 @@
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75
-                        0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21
-                        12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"
+                    0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21
+                    12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"
                     />
                 </svg>
                 <span>Toggle Dark Mode</span>
