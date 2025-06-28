@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<script>
+    let result = 0;
+    let lastOperation = null;
+    let operationDone = false;
+    
+    function resetApp(){
+        result = 0;
+        resultBox.textContent = 0;
+        lastOperation = null;
+        operationDone = false;
+    }
+
+    function cleanResult(value, precision = 10){
+        return Number(parseFloat(value.toFixed(precision)));
+    }
+    
+    function placeNumber(number, resultBox){
+        resultBox.textContent = resultBox.textContent === '0' ? number : resultBox.textContent + number;
+    }
+
+    function handleOperation(operation, resultBox){
+        currentValue = parseFloat(resultBox.textContent);
+
+        switch(operation){
+            case 'clear':
+                resultBox.textContent = 0;
+                lastOperation = null;
+                result = 0;
+                break;
+
+            case 'backspace':
+                if(resultBox.textContent === 0){
+                    break;
+                }else{
+                    resultBox.textContent = resultBox.textContent.slice(0, -1);
+                    if(!resultBox.textContent){
+                        resultBox.textContent = '0';
+                    }
+                    break;
+                }
+
+            case 'equal':
+                switch(lastOperation){
+                    case 'add':
+                        result += currentValue;
+                        resultBox.textContent = cleanResult(result).toString();
+                        break;
+
+                    case 'substract':
+                        result -= currentValue;
+                        resultBox.textContent = cleanResult(result).toString();
+                        break;
+
+                    case 'divide':
+                        if(currentValue == 0){
+                            resultBox.textContent = 'Math error';
+                            break;
+                        }else{
+                            result /= currentValue;
+                            resultBox.textContent = cleanResult(result).toString();
+                            break;
+                        }
+
+                    case 'multiply':
+                        result *= currentValue;
+                        resultBox.textContent = cleanResult(result).toString();
+                        break;
+                }
+                lastOperation = null;
+                result = 0;
+                operationDone = true;
+                break;
+
+            case 'add':
+                result += currentValue;
+                resultBox.textContent = 0;
+                lastOperation = 'add';
+                break;
+
+            case 'substract':
+                if(result == 0){
+                    result += currentValue;
+                }else{
+                    result -= currentValue;
+                }
+
+                resultBox.textContent = 0;
+                lastOperation = operation;
+                break;
+            
+            case 'divide':
+                result = currentValue;
+                resultBox.textContent = 0;
+                lastOperation = operation;
+                break;
+            
+            case 'multiply':
+                if(result == 0){
+                    result = currentValue;
+                }else{
+                    result *= currentValue;
+                }
+                 
+                resultBox.textContent = 0;
+                lastOperation = operation;
+                break;
+            
+            case 'dot':
+                if (!resultBox.textContent.includes('.')) {
+                    resultBox.textContent += '.';
+                }
+                break;
+            
+            }
+        return result;
+    }
+
+    function loadApp(){
+        const operations = document.querySelectorAll('.operationButton');
+        const numbers = document.querySelectorAll('.numberButton');
+        const resultBox = document.getElementById('resultBox');
+
+        operations.forEach(button => {
+            button.addEventListener('click', () => {
+                handleOperation(button.dataset.operation, resultBox);
+            })
+        });
+
+        numbers.forEach(button => {
+            button.addEventListener('click', () => {
+                if(operationDone){
+                    resetApp();
+                }
+                placeNumber(button.dataset.value, resultBox)
+            });
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', loadApp);
+</script>
+<body>
+    <div id="bg" class="bg">
+        <div id="appContainer" class="appContainer">
+            <div class="resultBox" id="resultBox">0</div>
+            <div class="operationButton" id="backspaceButton" data-operation="backspace">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" 
+                    viewBox="0 0 24 24" stroke-width="1.5" 
+                    stroke="currentColor" class="size-8">
+                    <path stroke-linecap="round" stroke-linejoin="round" 
+                        d="M12 9.75 14.25 12m0 0 2.25 
+                        2.25M14.25 12l2.25-2.25M14.25 
+                        12 12 14.25m-2.58 4.92-6.374-6.375a1.125 
+                        1.125 0 0 1 0-1.59L9.42 4.83c.21-.211.497-.33.795-.33H19.5a2.25 
+                        2.25 0 0 1 2.25 2.25v10.5a2.25 2.25 0 0 1-2.25 
+                        2.25h-9.284c-.298 0-.585-.119-.795-.33Z"
+                    />
+                </svg>
+            </div>
+            <div class="operationButton" id="clearButton" data-operation="clear">Clear</div>
+            <div class="numberButton" data-value=7>7</div>
+            <div class="numberButton" data-value=8>8</div>
+            <div class="numberButton" data-value=9>9</div>
+            <div class="operationButton" data-operation="divide">%</div>
+            <div class="numberButton" data-value=4>4</div>
+            <div class="numberButton" data-value=5>5</div>
+            <div class="numberButton" data-value=6>6</div>
+            <div class="operationButton" data-operation="multiply">X</div>
+            <div class="numberButton" data-value=1>1</div>
+            <div class="numberButton" data-value=2>2</div>
+            <div class="numberButton" data-value=3>3</div>
+            <div class="operationButton" data-operation="substract">-</div>
+            <div class="numberButton" data-value=0>0</div>
+            <div class="operationButton" data-operation="dot">.</div>
+            <div class="operationButton" data-operation="equal">=</div>
+            <div class="operationButton" data-operation="add">+</div>
+        </div>
+    </div>
+</body>
+</html>
