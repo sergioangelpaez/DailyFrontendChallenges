@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Form Checker</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="/script.js"></script>
+</head>
+<body>
+    <div class="bg">
+        <div class="app-container">
+            <div class="app">
+                <div class="form-tittle">
+                    <span>Basic Form Checker</span>
+                </div>
+                <form action="" method="post" id="userDataForm">
+                    <div class="form-element">
+                        <label for="username">
+                            Username
+                            <input type="text" id="username" name="username" placeholder="">
+                            <span id="usernameErrorMessage" class="errorMessage"></span>
+                        </label>
+                    </div>
+                    <div class="form-element">
+                        <label>
+                            Email
+                            <input type="email" id="email" name="email">
+                            <span id="emailErrorMessage" class="errorMessage"></span>
+                        </label>
+                    </div>
+                    <div class="form-element">
+                        <label>
+                            Password
+                            <input type="password" id="password" name="password">
+                            <span id="passwordErrorMessage" class="errorMessage"></span>
+                        </label>
+                    </div>
+                    <div class="form-element">
+                        <label>
+                            Confirm password
+                            <input type="password" id="confirmPassword" name="confirmPassword">
+                            <span id="confirmPasswordErrorMessage" class="errorMessage"></span>
+                        </label>
+                    </div>
+                    <button type="submit" id="submitButton">
+                        Submit
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
