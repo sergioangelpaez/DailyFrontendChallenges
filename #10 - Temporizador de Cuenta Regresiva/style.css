@@ -1,0 +1,125 @@
+:root{
+    --light-gray: #f5f5f5;
+    --gray: #999999;
+    --blue: #6199ff;
+    --dark-blue: #2a75ff;
+    --dark-blue-hover: #2064e2;
+    --dark-blue-active: #285cbd;
+    --error-red: #e93f3f;
+}
+
+body{
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.bg{
+    width: 100%;
+    height: 100vh;
+    background-color: var(--light-gray);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.app-container{
+    width: 500px;
+    height: fit-content;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 10px 10px 10px 0px var(--gray);
+}
+
+.app{
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.app-tittle{
+    font-size: x-large;
+    font-weight: 600;
+}
+
+.timer-inputs-container{
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.timer-input{
+    display: flex;
+    width: 45%;
+    height: 100%;
+    flex-direction: column;
+}
+
+.timer-input > span{
+    width: 100%;
+    font-size: small;
+    font-weight: 500;
+}
+
+input{
+    width: 100%;
+    border: 1px solid var(--blue);
+    border-radius: 5px;
+    font-size: medium;
+    padding: 5px 5px;
+    text-align: center;
+}
+
+input:hover{
+    border: 1px solid var(--dark-blue);
+}
+
+input:focus{
+    outline: 1px solid var(--dark-blue);
+}
+
+.timer{
+    font-size: xx-large;
+}
+
+.controls{
+    width: fit-content;
+    display: flex;
+    gap: 15px;
+}
+
+button{
+    cursor: pointer;
+    width: 80px;
+    background-color: var(--dark-blue);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    color: white;
+    transition: cubic-bezier();
+    transition-duration: 300ms;
+}
+
+button:hover{
+    scale: 1.09;
+    background-color: var(--dark-blue-hover);
+}
+
+button:active{
+    scale: 0.99;
+    background-color: var(--dark-blue-active);
+}
+
+.errorMessage{
+    font-size: small;
+    color: var(--error-red);
+}
