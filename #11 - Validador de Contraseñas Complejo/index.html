@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Validator</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg">
+        <div class="app-container">
+            <div class="app">
+                <div class="app-tittle">
+                    <span>Password Validator</span>
+                </div>
+                <div class="password-input-container">
+                    <input type="password" name="password" id="passwordInput" placeholder="Type in your password">
+                </div>
+                <div class="message-container">
+                    <span class="" id="message"></span>
+                </div>
+                <div class="rules-container">
+                    <span>Please make sure your password meets the following requirements:</span>
+                    <div class="rule rule-not-met" id="rule1">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                        </svg>
+                        <span>Min. 8 characters.</span>
+                    </div>
+                    <div class="rule rule-not-met" id="rule2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                        </svg>
+                        <span>Max. 20 characters.</span>
+                    </div>
+                    <div class="rule rule-not-met" id="rule3">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                        </svg>
+                        <span>At least one uppercase letter.</span>
+                    </div>
+                    <div class="rule rule-not-met" id="rule4">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                        </svg>
+                        <span>At least one lowercase letter.</span>
+                    </div>
+                    <div class="rule rule-not-met" id="rule5">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                        </svg>
+                        <span>At least one special character: !@#$%^&*()_+-=[]{};:'"|,.<>/?.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

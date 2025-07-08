@@ -1,0 +1,127 @@
+:root{
+    --light-gray: #f0f0f0;
+    --white: #fff;
+    --gray: #a1a1a1;
+    --border-gray: #e4e4e4;
+    --light-blue: #76b6ff;
+    --dark-blue: #137df7;
+    --green: #0fa809;
+    --red: #e22b2b;
+}
+
+body{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.bg{
+    width: 100%;
+    height: 100vh;
+    background-color: var(--light-gray);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.app-container{
+    width: 400px;
+    min-height: 200px;
+    height: fit-content;
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: 10px 10px 10px var(--gray);
+    border: 1px solid var(--border-gray);
+}
+
+.app{
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.app-tittle{
+    font-size: x-large;
+    font-weight: 600;
+}
+
+.password-input-container{
+    width: 100%;
+}
+
+label{
+    font-size: small;
+}
+
+input{
+    width: 100%;
+    border: 1px solid var(--light-blue);
+    border-radius: 5px;
+    font-size: small;
+    padding: 10px;
+}
+
+input:hover{
+    border: 1px solid var(--dark-blue);
+}
+
+input:focus{
+    outline: 1px solid var(--dark-blue);
+}
+
+.message-container{
+    width: 100%;
+    font-size: small;
+    font-weight: 500;
+}
+
+.message-error{
+    color: var(--red);
+}
+
+.message-normal{
+    color: var(--dark-blue);
+}
+
+.message-success{
+    color: var(--green);
+}
+
+.message-error{
+    color: var(--red);
+}
+
+.rules-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid var(--border-gray);
+    border-radius: 5px;
+    font-size: small;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.rule{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    height: 40px;
+    gap: 10px;
+    padding: 0px 5px;
+    font-weight: 500;
+}
+
+.rule > span{
+    max-width: 90%;
+}
+
+.rule-met{
+    color: var(--green);
+}
+
+.rule-not-met{
+    color: var(--red);
+}
